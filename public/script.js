@@ -15,7 +15,7 @@ const maxAllowedSize = 100 * 1024 * 1024;
 const uploadingBarTitle = document.querySelector('.uploading-bar-title');
 const removeToaster = document.getElementById('cut-btn');
 
-const baseURL = process.env.APP_BASE_URL;
+const baseURL = 'https://sharekaroapp.herokuapp.com';
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 
