@@ -4,8 +4,8 @@
   "description": "\"File Sharing WebApp\"",
   "main": "index.js",
   "scripts": {
+    "serve": "node index.js",
     "start": "nodemon index.js",
-    "serve": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "\"Deepak Sharma\"",
