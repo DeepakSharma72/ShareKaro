@@ -1,0 +1,28 @@
+<%- include('include/header') %>
+
+
+    <div class="main-link-container">
+        <div class="toast-container">
+            <span class="msg-bar">Copied Sucesfully...</span>
+            <span id="cut-btn"><i class="fa-solid fa-circle-xmark"></i></span>
+        </div>
+        <div class="link-container">
+            <h1>Here is Your Active Links <i class="fa-solid fa-link"></i></h1>
+            <%if(listData.length===0) {%>
+                Oops No Data Available
+                <% }else{%>
+                    <%for(let data of listData){ %>
+                        <div class="link-item">
+                            <span class="link-space">
+                                <%= data %>
+                            </span>
+                            <img class="copy-icon" src="./Images/copyicon.svg">
+                        </div>
+                        <%} } %>
+        </div>
+    </div>
+    </body>
+
+    <script src="/links.js"></script>
+
+    </html>

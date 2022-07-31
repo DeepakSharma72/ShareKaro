@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SharKaro - (File Sharing App)</title>
+    <link rel="stylesheet" href="/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="main-container">
+        <% if(msg){ %>
+            <div class="toast-container">
+                <span class="msg-bar">
+                    <%= msg %>
+                </span>
+                <span id="cut-btn"><i class="fa-solid fa-circle-xmark"></i></span>
+            </div>
+            <% }%>
+                <div class="form-container">
+                    <div class="log-sign-btn">
+                        <div class="<%= reg === false ?'active-log-btn':'' %> reg-btn">LogIn</div>
+                        <div class="<%= reg === true ?'active-log-btn':'' %> reg-btn">SignUp</div>
+                    </div>
+                    <form class="<%= reg === false ?'inactive-log-btn':'' %>  reg-btn-form" action="/signup" method='POST'>
+                        <div class="form-item">
+                            <input type="email" placeholder="Email Id" name="emailid" required>
+                        </div>
+                        <div class="form-item">
+                            <input type="password" placeholder="Password" name="password" required>
+                        </div>
+                        <div class="form-item">
+                            <input type="text" placeholder="Confirm Password" name="cpassword" required>
+                        </div>
+                        <div class="form-item">
+                            <div class="radio-cont">
+                                <input type="radio" id="radio-check-id" required name="radio">
+                                <label for="radio-check-id">I agree to the terms and Condition</label>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <input class="sub-btn" type="submit" value="Register">
+                        </div>
+                    </form>
+                    <form class="<%= reg === true?'inactive-log-btn':'' %> reg-btn-form" action="/login" method='POST'>
+                        <div class="form-item">
+                            <input type="email" placeholder="Email Id" name="emailid" required>
+                        </div>
+                        <div class="form-item">
+                            <input type="password" placeholder="Password" name="password" required>
+                        </div>
+                        <div class="form-item">
+                            <input class="sub-btn" type="submit" value="Submit">
+                        </div>
+                        <div class="form-item">
+                            <div class="forget-pass-container">
+                                <a href="#">Forget Password</a>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <div class="social-links">
+                                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#"><i class="fa-brands fa-github"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram-square"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    </div>
+
+</body>
+<script src="/register.js"></script>
+
+</html>

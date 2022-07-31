@@ -1,0 +1,58 @@
+<%- include('include/header') %>
+
+
+    <div class="main-home-container">
+        <div class="toast-container">
+            <span class="msg-bar">Verify Your Email to Login</span>
+            <span id="cut-btn"><i class="fa-solid fa-circle-xmark"></i></span>
+        </div>
+
+        <section class="upload-container">
+            <div class="drop-zone">
+                <div class="icon-container">
+                    <img src="./Images/file.svg" class="center" draggable="false" alt="">
+                    <img src="./Images/file.svg" class="left" draggable="false" alt="">
+                    <img src="./Images/file.svg" class="right" draggable="false" alt="">
+                </div>
+                <input type="file" id="fileinput">
+                <div class="title">
+                    Drop Your files here or, <span class="browseBtn">browse</span>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="bg-progess">
+                    <div class="uploading-bar-title">Uploading...</div>
+                    <div class="percent-container">
+                        <span id="percent">45%</span>
+                    </div>
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="sharing-container">
+                <p class="expire">Link expires in 24 hours</p>
+                <div class="input-container">
+                    <input type="text" id="fileURL" readonly value="https://mail.google.com/mail/u/1/#inbox">
+                    <img src="./Images/copyicon.svg" alt="copy-btn" id="copy-btn">
+                </div>
+                <p class="expire">Or Send via Email</p>
+                <div class="email-container">
+                    <form id="email-form">
+                        <div class="field">
+                            <label for="sender">Your Email</label>
+                            <input type="email" required name="fromEmail" id="sender">
+                        </div>
+                        <div class="field">
+                            <label for="reciever">Reciever's Email</label>
+                            <input type="email" required name="toEmail" id="reciever">
+                        </div>
+                        <button type="submit">Send </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+<script src="script.js"></script>
+</html>

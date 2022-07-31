@@ -1,0 +1,57 @@
+.main-link-container {
+    background-color: #eff5fe;
+    min-height: calc(100vh - 80px);
+    padding: 30px;
+}
+
+.link-container {
+    margin: 0 auto;
+    width: 700px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 10px 20px 20px #0000002e;
+}
+
+.link-item{
+    margin: 15px 5px;
+    border: 2px dashed #0288d147;
+    padding: 7px;
+    background-color: #eff5fe;
+    border-radius: 10px;
+    position: relative;
+}
+
+.copy-icon{
+    width: 22px;
+    position: absolute;
+    right: 4px;
+}
+
+.toast-container{
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    background-color: #b1b7ff7b;
+    padding: 20px 0;
+    font-size: 20px;
+    color: #5c4e43;
+    text-align: center;
+    transform: translateY(70px);
+    transition: all 0.3s ease-in-out;
+}
+
+#cut-btn{
+    float: right;
+    margin-right: 20px;
+    color: rgba(0, 0, 0, 0.443);
+}
+
+#cut-btn>i{
+    font-size: 25px;
+}
+
+#cut-btn>i:hover{
+    color: rgba(0, 0, 0, 0.743);;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SharKaro - (File Sharing App)</title>
+    <link rel="stylesheet" href="/dowload.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <section class="download-container">
+            <img class="download-icon" src="/Images/dowloadicon.jpeg">
+            <% if(error){ %>
+            <div class="Error-section"><%= error %></div>
+            <%} else{%>
+            <h2 class="main-head-div">Your file is ready to download</h2>
+            <p class="expire-section">Link expires in 24 hours</p>
+            <div class="file-name"><%= filename %></div>
+            <div class="file-size"><%= parseInt(filesize/1024) %>KB</div>
+            <button class="download-btn"><a href='<%= download %>'>Dowload</a></button>
+            <% } %>
+        </section>
+    </div>
+</body>
+
+</html>
