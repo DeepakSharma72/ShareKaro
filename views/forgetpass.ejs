@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShareKaro - (File Sharing App)</title>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #eff5fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container {
+            font-family: 'Times New Roman', Times, serif;
+            box-sizing: border-box;
+            width: 450px;
+            min-height: 190px;
+            background-color: white;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.301), -4px -4px 10px rgba(0, 0, 0, 0.301);
+            padding: 0 100px;
+        }
+
+        .main-head {
+            margin-top: 25px;
+            margin-bottom: 35px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .email-form-item {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .email-form-item>input {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        #email-box {
+            font-size: large;
+            font-weight: bold;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+        #submit-box {
+            font-size: large;
+            font-weight: bold;
+            padding: 5px 15px;
+            background-color: #0257d6;
+            color: white;
+            border: none;
+            outline: none;
+        }
+
+        .toast-container {
+            width: 450px;
+            position: absolute;
+            top: 0;
+            background-color: #b1b7ff7b;
+            padding: 20px 0;
+            font-size: 20px;
+            color: #5c4e43;
+            text-align: center;
+            transform: translateY(-70px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        #cut-btn {
+            float: right;
+            margin-right: 20px;
+            color: rgba(0, 0, 0, 0.443);
+        }
+
+        #cut-btn>i {
+            font-size: 25px;
+        }
+
+        #cut-btn>i:hover {
+            color: rgba(0, 0, 0, 0.743);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="main-container">
+        <%if(msg !=undefined){ %>
+            <div class="toast-container">
+                <span class="msg-bar">
+                    <%= msg %>
+                </span>
+                <span id="cut-btn"><i class="fa-solid fa-circle-xmark"></i></span>
+            </div>
+            <% }%>
+                <form method="post" action='/forget-password'>
+                    <div class="main-head">
+                        Enter your Email here..
+                    </div>
+                    <%if(verified === false){%>
+                        <div class="email-form-item">
+                            <input id="email-box" name="emailID" type="email" placeholder="Email Id" required>
+                        </div>
+                        <%}else{ %>
+                            <div class="email-form-item">
+                                <input id="email-box" name="invemailID" type="email" placeholder="Email Id" value="<%= email%>" disabled>
+                                <input id="email-box" name="emailID" type="email" placeholder="Email Id" value="<%= email%>" style = "display: none;">
+                            </div>
+                            <div class="email-form-item">
+                                <input id="email-box" name="password" type="password" placeholder="Password" required>
+                            </div>
+                            <div class="email-form-item">
+                                <input id="email-box" name="cpassword" type="text" placeholder="Confirm Password" required>
+                            </div>
+                            <%} %>
+                            <div class="email-form-item">
+                                <input id="submit-box" type="submit" value="Submit">
+                            </div>
+                </form>
+    </div>
+</body>
+<script>
+    const removeToaster = document.getElementById('cut-btn');
+    const toastContainer = document.querySelector('.toast-container');
+    let timeout;
+    window.addEventListener('load', () => {
+        toastContainer.style = 'transform: translateY(30px)';
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            toastContainer.style = 'transform: translateY(-170px)';
+        }, 2000);
+    });
+
+    removeToaster.addEventListener('click', () => {
+        toastContainer.style = 'transform: translateY(-170px)';
+    });
+</script>
+
+</html>

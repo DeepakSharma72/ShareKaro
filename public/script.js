@@ -16,6 +16,7 @@ const uploadingBarTitle = document.querySelector('.uploading-bar-title');
 const removeToaster = document.getElementById('cut-btn');
 
 const baseURL = 'https://sharekaroapp.herokuapp.com';
+// const baseURL = 'http://localhost:3000';
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 

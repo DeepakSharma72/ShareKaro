@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('../services/auth');
 
-router.get('/', (req, res) => {
-    res.status(200).render('register', { msg: undefined, reg: false });
+router.get('/', auth, (req, res) => {
+    res.status(200).redirect('/home');
 });
 
 
@@ -34,9 +34,9 @@ router.post('/signup', async (req, res) => {
                 expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 3)),
                 httpOnly: true
             })
-        const userid =  await result._id;
-        // console.log("yep i got the id:",userid.toString());
-        const _idd = await userid.toString(); 
+            const userid = await result._id;
+            // console.log("yep i got the id:",userid.toString());
+            const _idd = await userid.toString();
 
             // now sending email....
             const sendEmail = require('../services/emailService');
@@ -80,6 +80,23 @@ router.get('/verify/:_id', async (req, res) => {
     }
 })
 
+router.get('/forget-password/verify/:_id', async (req, res) => {
+    try {
+        const document = await Users.findOne({ _id: req.params._id });
+        if (!document) {
+            return res.status(404).send("Invalid Link or Link expired register again...");
+        }
+        else {
+            document.Status = 1;
+            await document.save();
+            return res.render('forgetpass', { msg: 'Email is Verified...', verified: true, email: document.EmailID });
+        }
+    }
+    catch (err) {
+        return res.status(404).send('page not found');
+    }
+});
+
 
 // login router... storing cookies here
 router.post('/login', async (req, res) => {
@@ -119,10 +136,65 @@ router.get('/logout', auth, async (req, res) => {
         res.clearCookie('sharekaro');
         console.log("log out succesful");
         await req.user.save();
-        res.status(200).redirect('/');
+        res.render('register', { msg: 'Sucessfuly LogOut..', reg: false });
     }
     catch (err) {
         res.status(400).send('unable to logout');
+    }
+});
+
+router.get('/forget-password', (req, res) => {
+    res.status(200).render('forgetpass', { msg: undefined, verified: false });
+});
+
+router.post('/forget-password', async (req, res) => {
+    try {
+        const EmailID = req.body.emailID;
+        const userData = await Users.findOne({ EmailID });
+        if (!userData) {
+            res.render('forgetpass', { msg: 'No User Exist with this email Id.', verified: false });
+            return;
+        }
+        if (!req.body.password) {
+            userData.Status = 0;
+            await userData.save();
+            console.log(userData);
+            const userid = await userData._id;
+            // console.log("yep i got the id:",userid.toString());
+            const _idd = await userid.toString();
+
+            // now sending email....
+            const sendEmail = require('../services/emailService');
+            sendEmail({
+                from: 'deepaknitd142024@gmail.com',
+                to: EmailID,
+                subject: 'ShareKaro File Sharing',
+                text: "jai shree ram",
+                html: require('../services/emailverifytemplate')({
+                    emailFrom: EmailID,
+                    downloadLink: `${process.env.APP_BASE_URL}/forget-password/verify/${_idd}`,
+                    expires: '24 hours'
+                })
+            });
+            res.render('forgetpass', { msg: `Verification link is sent to ${EmailID}`, verified: false });
+        }
+        else
+        {
+            if(req.body.password !== req.body.cpassword)
+            {
+                res.render('forgetpass',{msg: 'password do not match!',verified: true, email: EmailID});
+            }
+            else
+            {
+                userData.Status = 1;
+                userData.Password = req.body.password;
+                await userData.save();
+                res.render('register',{msg: 'Password is succesfully changed. Login to use Service',reg: false});
+            }
+        }
+    }
+    catch (err) {
+        res.send('unable to set password');
     }
 });
 
